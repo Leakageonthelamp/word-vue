@@ -1,23 +1,32 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Dashboard from "@/views/dashboard";
+import NewWord from "@/components/newWord.vue";
+import ViewWord from "@/views/viewWord.vue";
+import EditWord from "@/components/editWord.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "dashboard",
+    component: Dashboard
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    path: "/new/",
+    name: "new-word",
+    component: NewWord
+  },
+  {
+    path: "/edit/:word_id",
+    name: "edit-word",
+    component: EditWord
+  },
+  {
+    path: "/view/:word_id",
+    name: "view-word",
+    component: ViewWord
   }
 ];
 
