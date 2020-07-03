@@ -1,28 +1,31 @@
 <template>
   <div id="edit-word">
-    <div class="row">
-      <div class="col m5 ">
-        <h3 class="header">Edit saved word</h3>
+    <div class="row center">
+      <div class="col m11">
+        <h3 class="header col m7 offset-m3">Edit saved word</h3>
       </div>
-      <form @submit.prevent="updateWord" class="col s12">
+      <form @submit.prevent="updateWord" class="col s10 offset-m1 center">
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <input disabled type="text" v-model="word_id" required>
+            <label class="active">Word ID</label>
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <input type="text" v-model="word_obj" required>
+            <label class="active">Word</label>
           </div>
         </div>
         <div class="row">
-          <div class="input-field col s6">
-            <input type="text" v-model="word_des" required>
+          <div class="input-field col s12">
+            <textarea class="materialize-textarea" type="text" v-model="word_des" required></textarea>
+            <label class="active">Word meaning</label>
           </div>
         </div>
 
         <button type="submit" class="btn orange darken-2">Edit</button>
-        <router-link to="/" class="btn grey marginL">Cancel</router-link>
+        <button @click="onClose" class="btn grey marginL">Cancel</button>
       </form>
     </div>
   </div>
@@ -40,6 +43,9 @@ export default {
       word_des: null
     };
   },
+  created (){
+    this.fetchData()
+  },
   beforeRouteEnter (to, from, next) {
     db.collection('worddb')
     .where('word_id','==', to.params.word_id)
@@ -55,12 +61,12 @@ export default {
       })
     })
   },
-  watch: {
-    '$route': 'fetchData'
-  },
+  // watch: {
+  //   '$route': 'fetchData'
+  // },
   methods:{
-    fetchData() {
-      db.collection('worddb')
+    async fetchData() {
+      await db.collection('worddb')
       .where('word_id','==',this.$route.params.word_id)
       .get()
       .then(querySnapshot => {
@@ -86,12 +92,16 @@ export default {
             word_des: this.word_des
           })
           .then(() =>{
-            this.$router.push({name: 'view-word',
-            params: {word_id: this.word_id}})
+            this.onClose()
+            // this.$router.push({name: 'view-word',
+            // params: {word_id: this.word_id}})
           })
         })
       })
-    }
+    },
+    onClose() {
+      this.$emit("close");
+    },
   },
 };
 </script>
@@ -101,7 +111,9 @@ export default {
    margin-left: 0.5rem;
  }
  .header{
-   font-size: 40px;
+   margin-top: 10px;
+   justify-content: center;
+   font-size: 30px;
    font-weight: 500;
    text-align: center;
    padding: 15px;

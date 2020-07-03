@@ -4,12 +4,18 @@ import Dashboard from "@/views/dashboard";
 import NewWord from "@/components/newWord.vue";
 import ViewWord from "@/views/viewWord.vue";
 import EditWord from "@/components/editWord.vue";
+import Mainpage from "@/views/mainpage";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    name: "mainpage",
+    component: Mainpage
+  },
+  {
+    path: "/dashboard/",
     name: "dashboard",
     component: Dashboard
   },

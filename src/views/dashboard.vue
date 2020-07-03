@@ -32,7 +32,7 @@
 
     <Modal v-if="showModal">
       <template slot="header">
-        <div>
+        <div class="navbar-header">
           <Navbar />
         </div>
       </template>
@@ -134,4 +134,5 @@ export default {
 .action-button {
   zoom: 1.3;
 }
+
 </style>

@@ -31,7 +31,7 @@
 
       <template slot="body">
         <div>
-          
+          <Editword @close="closeModal" />
         </div>
       </template>
     </Modal>
@@ -45,14 +45,14 @@
 <script>
 import Modal from '../components/editWordmodal'
 import Navbar from '../components/Navbar'
-//import Editword from '../components/editWord'
+import Editword from '../components/editWord'
 import db from '../plugins/firebaseInit'
 export default {
   name: "view-word",
   components: {
     Modal,
     Navbar,
-    //Editword
+    Editword
   },
   data() {
     return {
@@ -104,10 +104,14 @@ export default {
           querySnapshot.forEach(doc =>{
             doc.ref.delete();
             this.fetchData()
-            this.$router.push('/')
+            this.$router.push('/dashboard')
           })
         })
       }
+    },
+    closeModal(){
+      this.showModal = false;
+      this.fetchData()
     }
   },
 };

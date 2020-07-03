@@ -1,11 +1,11 @@
 <template>
-  <nav>
-    <div class="nav-wrapper orange darken-2 nav-border">
-      <div class="container">
-        <router-link to="/" class="feature-logo">Word Keeping</router-link>
+    <nav>
+      <div class="nav-wrapper orange darken-2">
+        <div class="container">
+          <router-link to="/" class="feature-logo">Word Keeping</router-link>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 </template>
 
 <style lang="scss" scoped>
