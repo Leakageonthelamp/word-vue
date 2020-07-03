@@ -36,7 +36,7 @@
       </template>
     </Modal>
 
-    <router-link to="/" class="btn grey marginT">Back</router-link>
+    <router-link :to="`/dashboard/${backPath}`" class="btn grey marginT">Back</router-link>
     <button @click="deleteWord" class="btn red marginL marginT">Delete</button>
 
   </div>
@@ -104,7 +104,7 @@ export default {
           querySnapshot.forEach(doc =>{
             doc.ref.delete();
             this.fetchData()
-            this.$router.push('/dashboard')
+            this.$router.push({ path: `/dashboard/${this.backPath}` })
           })
         })
       }
@@ -114,6 +114,11 @@ export default {
       this.fetchData()
     }
   },
+  computed: {
+    backPath(){
+      return this.$route.params.clsmID
+    }
+  }
 };
 </script>
 

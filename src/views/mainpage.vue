@@ -5,14 +5,14 @@
     </div>
     <div class="row">
           <div class="input-field col s6 offset-s3 box-color">
-            <input type="text" required />
+            <input type="text" v-model="classroomID" @keyup.enter="keyEnter" required />
             <label>Classroom ID</label>
             </div>
         </div>
 
     <div class="action-btn center">
         <router-link
-            to="/dashboard"
+            :to="`/dashboard/${classroomID}`"
             class="btn-floating btn-large waves-effect orange darken-2 center"
         >
             <i class="medium material-icons">chevron_right</i>
@@ -29,8 +29,14 @@ export default {
   },
   data() {
     return {
-      
+      classroomID: ""
     }
+  },
+  methods: {
+      keyEnter(){
+          const cls = this.classroomID
+          this.$router.push({ path: `/dashboard/${cls}` })
+      }
   }
 };
 </script>

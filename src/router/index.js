@@ -15,7 +15,7 @@ const routes = [
     component: Mainpage
   },
   {
-    path: "/dashboard/",
+    path: "/dashboard/:classroomID",
     name: "dashboard",
     component: Dashboard
   },
@@ -30,7 +30,7 @@ const routes = [
     component: EditWord
   },
   {
-    path: "/view/:word_id",
+    path: "/view/:clsmID/:word_id",
     name: "view-word",
     component: ViewWord
   }

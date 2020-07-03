@@ -7,7 +7,7 @@
       <form @submit.prevent="saveWord" class="col s8 offset-s2 center">
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" v-model="word_id" required />
+            <input type="text" v-model="word_id" requird />
             <label>Word ID</label>
           </div>
         </div>
@@ -35,9 +35,11 @@
 import db from "../plugins/firebaseInit";
 export default {
   name: "new-word",
+  props: [
+    'clsmID'
+  ],
   data() {
     return {
-      classroom_id: null,
       word_id: null,
       word_obj: null,
       word_des: null,
@@ -46,7 +48,7 @@ export default {
   methods: {
     async saveWord() {
       await db.collection("worddb").add({
-        classroom_id: this.classroom_id,
+        classroom_id: this.clsmID,
         word_id: this.word_id,
         word_obj: this.word_obj,
         word_des: this.word_des,
